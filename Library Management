@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+struct inputs {
+int id;
+int quantity;
+char name[30];
+};
+int count_lines=0;
+struct inputs book[10] ;
+void add_book()
+{
+    int x , y;
+    char z[30];
+    FILE *add;
+    add = fopen("mybook.txt","a+");
+    printf("please enter book id\n");
+    scanf("%d",&x);
+    printf("please enter the quantity of book\n");
+    scanf("%d",&y);
+    printf("please enter book name\n");
+    getchar();
+    gets(z);
+    fprintf(add,"%d\t%d\t%s\n",x,y,z);
+    fclose(add);
+}
+
+
+
+
+
+
+
+int main()
+{
+    char ch,ask;
+    int menuNo,j=0;
+    FILE * pl;
+    pl=fopen("mybook.txt","r");
+    ch=getc(pl);
+    while(ch!=EOF)
+    {
+        if (ch=='n')
+        {
+            count_lines+=1;
+        }
+        ch = getc(pl);
+    }
+    fclose(pl);
+    printf("%d\n",count_lines);
+    FILE *storing;
+    storing = fopen("mybook.txt","r");
+    fread(book,sizeof(struct inputs),10,storing);
+    fclose(storing);
+    printf("%d\n",book[0].id);
+    for(int i=0;i<10;i++)
+    {
+        printf("1-Insert a book\n");
+        printf("2-Delete a book by id\n");
+        printf("3-Search a book by id\n");
+        printf("4-Search a book by name\n");
+        printf("5-Display all books sorted by name\n");
+        printf("6-Display all books unsorted\n");
+        scanf("%d",&menuNo);
+        switch(menuNo)
+        {
+        case 1:
+            add_book();
+            break;
+       /*case 2:
+            delete_book();
+            break;*/
+        }
+        printf("Do u wants to perform any additional operation (y,n)\n");
+        scanf("%s",&ask);
+        if(ask == 'y')
+            continue;
+        else if (ask == 'n')
+            break;
+    }
+    return 0;
+}
