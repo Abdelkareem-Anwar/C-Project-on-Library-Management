@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1591627199 source:c:\users\2tv\desktop\pl project\screen shots\sad\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
